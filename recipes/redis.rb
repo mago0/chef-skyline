@@ -19,7 +19,7 @@ node.set['redis']['config']['configure_slowlog'] = true
 node.set['redis']['config']['no_appendfsync_on_rewrite'] = true
 node.set['redis']['config']['slowlog_max_len'] = 128
 node.set['redis']['config']['timeout'] = 0
-# node.set['redis']['config']['unixsocket'] = "/tmp/redis.sock"
+node.set['redis']['config']['unixsocket'] = "/tmp/redis.sock"
 # node.set['redis']['config']['unixsocketperms'] = 777
 
 case node['platform_family']
