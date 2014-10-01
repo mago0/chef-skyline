@@ -1,5 +1,5 @@
 
-include_recipe 'skyline::redis'
+include_recipe 'redisio'
 include_recipe 'scipy'
 
 node['skyline']['packages'].each do |p|

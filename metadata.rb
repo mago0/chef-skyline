@@ -14,6 +14,6 @@ recipe 'skyline::source', 'Installs Skyline via source'
   supports os
 end
 
-%w(git python redis scipy).each do |cb|
+%w(git python redisio scipy).each do |cb|
   depends cb
 end
