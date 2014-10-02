@@ -20,6 +20,7 @@ default['skyline']['pip_packages'] = %w(
   simplejson
   unittest2
   mock
+  six
   patsy
   statsmodels
   msgpack-python
