@@ -12,5 +12,5 @@ node.set['skyline']['redis_socket_path'] = socket
 
 node.set['redis']['default_settings']['unixsocketperm'] = 777
 
-include_recipe 'redis::install'
-
+include_recipe 'redisio::install'
+include_recipe 'redisio::enable'
