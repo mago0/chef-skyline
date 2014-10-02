@@ -34,6 +34,7 @@ default['skyline']['group'] = node['skyline']['user']
 default['skyline']['full_duration'] = 86_400
 default['skyline']['full_namespace'] = 'metrics.'
 default['skyline']['graphite_host'] = 'http://graphite.example.com'
+default['skyline']['graphite_carbon_port'] = 2003
 default['skyline']['install_dir'] = '/opt/skyline'
 default['skyline']['log_path'] = '/var/log/skyline'
 default['skyline']['mini_duration'] = 3600
@@ -46,16 +47,19 @@ default['skyline']['pid_path'] = '/var/run/skyline'
 default['skyline']['analyzer']['algorithms'] = %w(
   first_hour_average
   mean_subtraction_cumulation
-  simple_stddev_from_moving_average
+  stddev_from_average
   stddev_from_moving_average
   least_squares
   grubbs
   histogram_bins
+  median_absolute_deviation
+  ks_test
 )
 default['skyline']['analyzer']['analyzer_processes'] = 5
 default['skyline']['analyzer']['anomaly_dump'] = 'webapp/static/dump/anomalies.json'
+default['skyline']['analyzer']['boredom_set_size'] = 1
 default['skyline']['analyzer']['canary_metric'] = 'statsd.numStats'
-default['skyline']['analyzer']['consensus'] = 5
+default['skyline']['analyzer']['consensus'] = 6
 default['skyline']['analyzer']['min_tolerable_length'] = 1
 default['skyline']['analyzer']['max_tolerable_boredom'] = 100
 default['skyline']['analyzer']['stale_period'] = 500
@@ -68,6 +72,7 @@ default['skyline']['horizon']['max_queue_size'] = 500
 default['skyline']['horizon']['max_resolution'] = 1000
 default['skyline']['horizon']['pickle_port'] = 2024
 default['skyline']['horizon']['roomba_processes'] = 1
+default['skyline']['horizon']['roomba_grace_time'] = 600
 default['skyline']['horizon']['skip_list'] = []
 default['skyline']['horizon']['udp_port'] = 2025
 default['skyline']['horizon']['worker_processes'] = 2

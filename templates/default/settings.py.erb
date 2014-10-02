@@ -39,6 +39,13 @@ MINI_DURATION = <%= node['skyline']['mini_duration'] %>
 # Skyline and Horizon. Include http://.
 GRAPHITE_HOST = '<%= node['skyline']['graphite_host'] %>'
 
+#The Graph url used to link to Graphite (Or another graphite dashboard)
+# %s will be replaced by the metric name
+GRAPH_URL = 'http://' + GRAPHITE_HOST + '/render/?width=1400&from=-1hour&target=%s'
+
+# If you have a Graphite host set up, set its Carbon port.
+CARBON_PORT = <%= node['skyline']['graphite_carbon_port'] %>
+
 # If you have Oculus set up, set this metric to set the clickthrough
 # on the webapp. Include http://.
 OCULUS_HOST = '<%= node['skyline']['oculus_host'] %>'
@@ -74,6 +81,13 @@ MIN_TOLERABLE_LENGTH = <%= node['skyline']['analyzer']['min_tolerable_length'] %
 # analyzer will stop ignoring it.
 MAX_TOLERABLE_BOREDOM = <%= node['skyline']['analyzer']['max_tolerable_boredom'] %>
 
+# By default, the analyzer skips a metric if it it has transmitted a single
+# number MAX_TOLERABLE_BOREDOM times. Change this setting if you wish the size
+# of the ignored set to be higher (ie, ignore the metric if there have only
+# been two different values for the past MAX_TOLERABLE_BOREDOM datapoints).
+# This is useful for timeseries that often oscillate between two values.
+BOREDOM_SET_SIZE = <%= node['skyline']['analyzer']['boredom_set_size'] %>
+
 # The canary metric should be a metric with a very high, reliable resolution
 # that you can use to gauge the status of the system as a whole.
 CANARY_METRIC = '<%= node['skyline']['analyzer']['canary_metric'] %>'
@@ -86,6 +100,57 @@ ALGORITHMS = <%= node['skyline']['analyzer']['algorithms'].to_s %>
 # classified as anomalous.
 CONSENSUS = <%= node['skyline']['analyzer']['consensus'] %>
 
+# This is to enable second order anomalies. This is an experimental feature, so
+# it's turned off by default.
+ENABLE_SECOND_ORDER = False
+
+# This enables alerting.
+ENABLE_ALERTS = True
+
+# This is the config for which metrics to alert on and which strategy to use for each.
+# Alerts will not fire twice within EXPIRATION_TIME, even if they trigger again.
+# Schema: (
+#          ("metric1", "smtp", EXPIRATION_TIME),
+#          ("metric2", "pagerduty", EXPIRATION_TIME),
+#          ("metric3", "hipchat", EXPIRATION_TIME),
+#         )
+ALERTS = (
+    ("skyline", "smtp", 1800),
+)
+
+# Each alert module requires additional information.
+SMTP_OPTS = {
+    # This specifies the sender of email alerts.
+    "sender": "skyline-alerts@etsy.com",
+    # recipients is a dictionary mapping metric names
+    # (exactly matching those listed in ALERTS) to an array of e-mail addresses
+    "recipients": {
+        "skyline": ["abe@etsy.com", "you@yourcompany.com"],
+    },
+}
+
+# HipChat alerts require python-simple-hipchat
+HIPCHAT_OPTS = {
+    "auth_token": "pagerduty_auth_token",
+    # list of hipchat room_ids to notify about each anomaly
+    # (similar to SMTP_OPTS['recipients'])
+    "rooms": {
+        "skyline": (12345,),
+    },
+    # Background color of hipchat messages
+    # (One of "yellow", "red", "green", "purple", "gray", or "random".)
+    "color": "purple",
+}
+
+# PagerDuty alerts require pygerduty
+PAGERDUTY_OPTS = {
+    # Your pagerduty subdomain and auth token
+    "subdomain": "example",
+    "auth_token": "your_pagerduty_auth_token",
+    # Service API key (shown on the detail page of a "Generic API" service)
+    "key": "your_pagerduty_service_api_key",
+}
+
 """
 Horizon settings
 """
@@ -97,7 +162,7 @@ WORKER_PROCESSES = <%= node['skyline']['horizon']['worker_processes'] %>
 <% if node['skyline']['horizon']['horizon_ip'] -%>
 HORIZON_IP = '<%= node['skyline']['horizon']['horizon_ip'] %>'
 <% else -%>
-# HORIZON_IP = '0.0.0.0'
+HORIZON_IP = '0.0.0.0'
 <% end -%>
 
 # This is the port that listens for Graphite pickles over TCP, sent by Graphite's
@@ -124,6 +189,13 @@ MAX_QUEUE_SIZE = <%= node['skyline']['horizon']['max_queue_size'] %>
 # timeseries in order to keep them at FULL_DURATION. Keep this number small, 
 # as it is not important that metrics be exactly FULL_DURATION *all* the time.
 ROOMBA_PROCESSES = <%= node['skyline']['horizon']['roomba_processes'] %>
+
+# Normally Roomba will clean up everything that is older than FULL_DURATION
+# if you have metrics that are not coming in every second, it can happen
+# that you'll end up with INCOMPLETE metrics.
+# With this setting Roomba will clean up evertyhing that is older than
+# FULL_DURATION + ROOMBA_GRACE_TIME
+ROOMBA_GRACE_TIME = 600
 
 # The Horizon agent will ignore incoming datapoints if their timestamp
 # is older than MAX_RESOLUTION seconds ago.
