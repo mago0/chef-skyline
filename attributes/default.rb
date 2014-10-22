@@ -55,14 +55,27 @@ default['skyline']['analyzer']['algorithms'] = %w(
   median_absolute_deviation
   ks_test
 )
+default['skyline']['analyzer']['alert_methods'] = [
+  { metric: "skyline", method: "hipchat", expiration: 1800 }
+]
 default['skyline']['analyzer']['analyzer_processes'] = 5
 default['skyline']['analyzer']['anomaly_dump'] = 'webapp/static/dump/anomalies.json'
 default['skyline']['analyzer']['boredom_set_size'] = 1
 default['skyline']['analyzer']['canary_metric'] = 'statsd.numStats'
 default['skyline']['analyzer']['consensus'] = 6
+default['skyline']['analyzer']['enable_alerts'] = "False"
+default['skyline']['analyzer']['enable_second_order'] = "False"
 default['skyline']['analyzer']['min_tolerable_length'] = 1
 default['skyline']['analyzer']['max_tolerable_boredom'] = 100
 default['skyline']['analyzer']['stale_period'] = 500
+
+default['skyline']['analyzer']['hipchat']['url'] = "https://api.hipchat.com/v1/"
+default['skyline']['analyzer']['hipchat']['auth_token'] = nil
+default['skyline']['analyzer']['hipchat']['rooms'] = [
+  { name: "skyline", id: 1 }
+]
+
+default['skyline']['analyzer']['hipchat']['color'] = "purple"
 
 # Horizon Settings
 
@@ -86,3 +99,4 @@ default['skyline']['source']['reference'] = 'master'
 
 default['skyline']['webapp']['webapp_ip'] = '127.0.0.1'
 default['skyline']['webapp']['webapp_port'] = 1500
+
