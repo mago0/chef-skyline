@@ -99,4 +99,3 @@ default['skyline']['source']['reference'] = 'master'
 
 default['skyline']['webapp']['webapp_ip'] = '127.0.0.1'
 default['skyline']['webapp']['webapp_port'] = 1500
-
