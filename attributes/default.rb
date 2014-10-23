@@ -33,7 +33,8 @@ default['skyline']['group'] = node['skyline']['user']
 
 default['skyline']['full_duration'] = 86_400
 default['skyline']['full_namespace'] = 'metrics.'
-default['skyline']['graphite_host'] = 'http://graphite.example.com'
+default['skyline']['graphite_host'] = 'graph.example.com'
+default['skyline']['graph_url'] = "'http://' + GRAPHITE_HOST + '/render/?width=1400&from=-1hour&target=%s'"
 default['skyline']['graphite_carbon_port'] = 2003
 default['skyline']['install_dir'] = '/opt/skyline'
 default['skyline']['log_path'] = '/var/log/skyline'

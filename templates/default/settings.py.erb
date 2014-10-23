@@ -41,7 +41,7 @@ GRAPHITE_HOST = '<%= node['skyline']['graphite_host'] %>'
 
 #The Graph url used to link to Graphite (Or another graphite dashboard)
 # %s will be replaced by the metric name
-GRAPH_URL = 'http://' + GRAPHITE_HOST + '/render/?width=1400&from=-1hour&target=%s'
+GRAPH_URL = <%=node['skyline']['graph_url']%>
 
 # If you have a Graphite host set up, set its Carbon port.
 CARBON_PORT = <%= node['skyline']['graphite_carbon_port'] %>
