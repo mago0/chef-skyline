@@ -93,7 +93,7 @@ default['skyline']['horizon']['worker_processes'] = 2
 
 # Source Settings
 
-default['skyline']['source']['repo'] = 'git://github.com/etsy/skyline.git'
+default['skyline']['source']['repo'] = 'git://github.com/mago0/skyline.git'
 default['skyline']['source']['reference'] = 'master'
 
 # Webapp Settings

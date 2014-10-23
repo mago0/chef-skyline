@@ -1,8 +1,6 @@
-# chef-skyline [![Build Status](https://secure.travis-ci.org/bflad/chef-skyline.png?branch=master)](http://travis-ci.org/bflad/chef-skyline)
-
 ## Description
 
-Installs/configures [Skyline](https://github.com/etsy/skyline).
+Installs/configures [Skyline](https://github.com/mago0/skyline).
 
 ## Requirements
 
@@ -22,7 +20,7 @@ Installs/configures [Skyline](https://github.com/etsy/skyline).
 
 Third-Party Cookbooks
 
-* [redis](https://github.com/miah/chef-redis)
+* [redisio]
 * [scipy](https://github.com/bflad/chef-scipy)
 
 ## Attributes
@@ -131,3 +129,5 @@ See [LICENSE](LICENSE) file for more information.
 
 * Author:: Brian Flad (<bflad417@gmail.com>)
 * Copyright:: 2013 Brian Flad
+
+* Author:: Matt Williams (matt@williams-tech.net)
