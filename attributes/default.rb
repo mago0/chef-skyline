@@ -72,9 +72,8 @@ default['skyline']['analyzer']['stale_period'] = 500
 
 default['skyline']['analyzer']['hipchat']['url'] = "https://api.hipchat.com/v1/"
 default['skyline']['analyzer']['hipchat']['auth_token'] = nil
-default['skyline']['analyzer']['hipchat']['rooms'] = [
-  { name: "skyline", id: 1 }
-]
+default['skyline']['analyzer']['hipchat']['rooms'] = { skyline: 1 }
+
 
 default['skyline']['analyzer']['hipchat']['color'] = "purple"
 

@@ -138,8 +138,8 @@ HIPCHAT_OPTS = {
     # list of hipchat room_ids to notify about each anomaly
     # (similar to SMTP_OPTS['recipients'])
     "rooms": {
-      <% node['skyline']['analyzer']['hipchat']['rooms'].each do |room| -%>
-        "<%=room['name']%>": (<%=room['id']%>,),
+      <% node['skyline']['analyzer']['hipchat']['rooms'].keys.each do |room| -%>
+        "<%=room%>": (<%=node['skyline']['analyzer']['hipchat']['rooms'][room]%>,),
       <% end -%>
     },
     # Background color of hipchat messages
