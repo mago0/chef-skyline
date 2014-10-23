@@ -213,6 +213,9 @@ MAX_RESOLUTION = <%= node['skyline']['horizon']['max_resolution'] %>
 # you might skip things you don't intend to.
 SKIP_LIST = <%= node['skyline']['horizon']['skip_list'].to_s %>
 
+# Populate this list to selectively include metrics
+INCLUDE_LIST = <%= node['skyline']['horizon']['include_list'].to_s %>
+
 
 """
 Webapp settings

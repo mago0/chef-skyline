@@ -87,6 +87,7 @@ default['skyline']['horizon']['pickle_port'] = 2024
 default['skyline']['horizon']['roomba_processes'] = 1
 default['skyline']['horizon']['roomba_grace_time'] = 600
 default['skyline']['horizon']['skip_list'] = []
+default['skyline']['horizon']['include_list'] = []
 default['skyline']['horizon']['udp_port'] = 2025
 default['skyline']['horizon']['worker_processes'] = 2
 
